@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "jwtSecret": "elpix shortlist proj yo",
+  "mongoUrl": "mongodb+srv://Elpix:ElpixDb@cluster0-lpo5k.azure.mongodb.net/app?retryWrites=true&w=majority"
+}
