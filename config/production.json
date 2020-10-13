@@ -1,0 +1,6 @@
+{
+	"port": 5000,
+	"jwtSecret": "elpix shortlist proj yo",
+	"mongoUrl": "mongodb+srv://eldar:qqr1299-fefwe-0FDV-04Vsfdf-SF0V5-d00dvOGT@cluster0.lxqar.azure.mongodb.net/app?retryWrites=true&w=majority",
+	"baseUrl": "http://localhost:5000"
+}
