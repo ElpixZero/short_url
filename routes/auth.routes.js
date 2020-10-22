@@ -42,6 +42,7 @@ router.post(
 				password: hashedPassword,
 				sault,
 				cryptString,
+				isAdmin: false,
 			})
 
 			await newUser.save()

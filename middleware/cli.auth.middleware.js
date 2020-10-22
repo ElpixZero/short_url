@@ -23,6 +23,6 @@ module.exports = async (req, res, next) => {
 		req.user = user
 		next()
 	} catch (e) {
-		res.status(401).json({ message: 'Нет авторизации' })
+		res.status(401).json({ message: 'Нет аутентификации' })
 	}
 }

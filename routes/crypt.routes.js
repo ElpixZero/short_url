@@ -1,19 +1,16 @@
 const { Router } = require('express')
-const Crypt = require('../models/Crypt')
+const User = require('../models/User')
 const cliAuth = require('../middleware/cli.auth.middleware')
 const router = Router()
 
 router.post('/crypt', cliAuth, async (req, res) => {
 	try {
-		const crypt = new Crypt({
-			date: new Date(),
-			author: req.user._id,
-		})
+		console.log(req.user._id)
+		const user = await User.findOne(req.user._id)
 
-		await crypt.save()
+		user.crypts.push({ date: new Date() })
 
-		console.log(req.user._id, crypt.author)
-
+		await user.save()
 		res
 			.status(201)
 			.json({ sault: req.user.sault, cryptString: req.user.cryptString })
