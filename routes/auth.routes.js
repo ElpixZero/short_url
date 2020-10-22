@@ -5,6 +5,8 @@ const { check, validationResult } = require('express-validator')
 const User = require('../models/User')
 const router = Router()
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
+const { Types } = require('mongoose')
 
 router.post(
 	'/register',
@@ -32,8 +34,15 @@ router.post(
 				})
 
 			const hashedPassword = await bcrypt.hash(password, 12)
+			const sault = crypto.randomBytes(128).toString('base64')
+			const cryptString = crypto.randomBytes(128).toString('base64')
 
-			const newUser = new User({ email, password: hashedPassword })
+			const newUser = new User({
+				email,
+				password: hashedPassword,
+				sault,
+				cryptString,
+			})
 
 			await newUser.save()
 			res.status(201).json({ message: 'Пользователь создан' })
@@ -80,9 +89,11 @@ router.post(
 				expiresIn: '10h',
 			})
 
-			res.json({ token, userId: user.id })
+			res.json({
+				token,
+				userId: user.id,
+			})
 		} catch (e) {
-			console.log(e)
 			res.status(500).json({
 				message: 'Что-то пошло не так, попробуйте снова.',
 			})
